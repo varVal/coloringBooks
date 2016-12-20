@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Color Scene</title>
+	<style type="text/css">
+		.b{
+			color:blue;
+		}
+		.g{
+			color:green;
+		}
+		.y{
+			color:yellow;
+		}
+	</style>
+</head>
+<body>
+	<div id="viewport">
+	</div>
+	<script type="text/javascript">
+		//create variables to hold the picture
+		var pictureThis;
+		//select the DOM element that will be the viewport
+		var viewport=document.querySelector("#viewport");
+		//declare the data that is the picture
+		var landscape="bbbbbbbbbb<br>bbbbbyyybb<br>bbbbbbbbbb<br>bbbbbbbbbb<br>gggggggggg";
+		//make the data into an array
+		var horizLines=landscape.split("<br>");
+
+		//look through the data assigning each visual part a span and class and then put the data from the array into a form - here a string - to print out into the DOM viewport element.
+		for(var i = 0; i < horizLines.length; i++) {
+			var line=horizLines[i].split("");
+			for(var j=0;j<line.length;j++){
+				line[j]="<span class='" + line[j] +"'>" + line[j]+"</span>";
+			}
+			pictureThis+=line.join('') + "<br>";
+		}
+		viewport.innerHTML=pictureThis;
+
+	</script>
+</body>
+</html>
