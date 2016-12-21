@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Walk through drawing data</title>
+	<style type="text/css">
+		.b{
+			color:blue;
+		}
+		.bBg{
+			color:blue;
+			background-color:blue;
+		}
+		.g{
+			color:green;
+		}
+		.gBg{
+			color:green;
+			background-color:green;
+		}
+		.y{
+			color:yellow;
+		}
+		.yBg{
+			color:yellow;
+			background-color:yellow;
+		}
+	</style>
+</head>
+<body>
+	<div>
+		<h2><em>Imagine</em></h2>
+		<p><strong><em>Narrative Scenario</em>:</strong> Jack and Jill have access to a common object. Jill knows something about this data that she wants to communicate to Jack. When she looks at the data, she sees a picture and she wants Jack to be able to see the picture too. She can explain patterns and rules to Jack.Using the information she gives him, he can draw pictures and ask her if that's what she sees.</p>
+		<p><strong><em>Given</em>:</strong> This is the common data: "<span id="givenData">bbbbbbbbbbbbbbbyyybbbbbbbbbbbbbbbbbbbbbbgggggggggg</span>"</p>
+		<div>
+			<h3><em>Let's listen</em>:</h3>
+			<div class="jane">
+				<p class="says"><strong><em>Jane</em>:</strong> Hey Jack, write each character in the data string but make a new line after every ten characters.</p>
+			</div>
+			<div class="jack">
+				<div id="drawing1"></div>
+			</div>
+			<div class="jane">
+				<p><strong><em>Jane</em>:</strong> Whereever you see a b, color that b blue. And whereever you see a g, color that g green. And whereever you see a y, color that y yellow.</p>
+			</div>
+			<div class="jack">
+				<div id="drawing2"></div>
+			</div>
+			<div class="jane">
+				<p><strong><em>Jane</em>:</strong> But now imagine there's a box around each letter and if the box has a b inside of it, color the whole inside of the box blue. If the box has a g, color the inside of the box green. And if the box has a y, color the box yellow. Now can you see what I see?</p>
+			</div>
+			<div class="jack">
+				<p><strong><em>Jack</em>:</strong> Is this what you see?</p>
+				<div id="drawing3"></div>
+			</div>
+		</div>
+	</div>
+	<script type="text/javascript">
+
+		var drawing1=document.querySelector("#drawing1");
+		var drawing2=document.querySelector("#drawing2");
+		var drawing3=document.querySelector("#drawing3");
+		var givendata=document.querySelector("#givenData");
+
+		var data=givendata.innerHTML;
+		var dataArray=data.split("");
+
+		var pictureThis, representString;
+
+		//create first drawing
+		function enterBr(array){
+			for (var i = 0; i<array.length; i++) {
+				console.log("runThis");
+				if(i%11 == 0){
+					array.splice(i,0,"<br>");
+				}
+				else{
+					array[i];
+				}
+			}
+		}
+		enterBr(dataArray);
+		//join members of the array into a string
+		representString=dataArray.join("");
+		//show first drawing
+		drawing1.innerHTML=representString;
+
+		//create second drawing
+		//make the data into an array
+		var horizLines=representString.split("<br>");
+		//look through the data assigning each visual part a span and class and then put the data from the array into a form - here a string - to print out into the DOM viewport element.
+		function addColor(className){
+			for(var i = 0; i < horizLines.length; i++) {
+				var line=horizLines[i].split("");
+				for(var j=0;j<line.length;j++){
+					line[j]="<span class='" + line[j] + className +"'>" + line[j]+"</span>";
+				}
+				pictureThis+=line.join('') + "<br>";
+			}
+		}
+		addColor("");
+		drawing2.innerHTML=pictureThis;
+		pictureThis="";
+		addColor("Bg");
+		drawing3.innerHTML=pictureThis;
+	</script>
+</body>
+</html>
