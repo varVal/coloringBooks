@@ -8,11 +8,19 @@
 			color:blue;
 		}
 		.empty{
-			opacity:0;
+			color:rgb(20,203,203);
 		}
 		.g{
 			background-color:green;
 			color:green;
+		}
+		.liteBlue{
+			background-color:orange;
+			color:orange;
+		}
+		.o{
+			background-color:orange;
+			color:orange;
 		}
 		.y{
 			background-color:yellow;
@@ -23,6 +31,8 @@
 <body>
 	<div id="viewport">
 	</div>
+	Script:
+	Now you tell me what you see - but just use letters and give me rules. Represent your Viewport to me.
 	<script type="text/javascript">
 		//create variables to hold the picture
 		var pictureThis;
@@ -34,11 +44,15 @@
 		var horizLines=landscape.split("<br>");
 
 		//look through the data assigning each visual part a span and class and then put the data from the array into a form - here a string - to print out into the DOM viewport element.
+		/*
 		for(var i = 0; i < horizLines.length; i++) {
 			var line=horizLines[i].split("");
 			for(var j=0;j<line.length;j++){
 				if(line[j]==line[j].match(/b/)){
 					line[j]="<span class='" + line[j] +"'>" + line[j]+"</span>";
+				}
+				else if(line[j]==line[j].match(/b/) && line[j+1]==line[j+1].match(/y/)){
+					line[j]="<span class='liteBlue'>" + line[j]+"</span>";
 				}
 				else if(line[j]==line[j].match(/g/)){
 					line[j]="<span class='" + line[j] +"'>" + line[j]+"</span>";
@@ -54,6 +68,28 @@
 		}
 		viewport.innerHTML=pictureThis;
 
+	*/
+
+	for(var i = 0; i < horizLines.length; i++) {
+			var line=horizLines[i].split("");
+			for(var j=0;j<line.length;j++){
+				console.log("This: " +line[j] + " and last: " + line[j-1]);
+				if(line[j]==line[j].match(/y/) && line[j-1]==line[j-1].match(/\<span class='empty'\>b\<\/span\>/)){
+					line[j]="<span class='o'>" + line[j]+"</span>";
+				}
+				else if(line[j]==line[j].match(/y/) && line[j-1]==line[j-1].match(/\<span class='o'\>y\<\/span\>/)){
+					line[j]="<span class='y'>" + line[j]+"</span>";
+				}
+				else if(line[j]==line[j].match(/y/) && line[j+1]==line[j+1].match(/b/)){
+					line[j]="<span class='o'>" + line[j]+"</span>";
+				}
+				else {
+					line[j]="<span class='empty'>" + line[j]+"</span>";
+				}
+			}
+			pictureThis+=line.join('') + "<br>";
+		}
+		viewport.innerHTML=pictureThis;
 	</script>
 </body>
 </html>

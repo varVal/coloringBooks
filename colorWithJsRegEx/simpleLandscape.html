@@ -26,7 +26,6 @@
 		var landscape="bbbbbbbbbb<br>bbbbbyyybb<br>bbbbbbbbbb<br>bbbbbbbbbb<br>gggggggggg";
 		//make the data into an array
 		var horizLines=landscape.split("<br>");
-
 		//look through the data assigning each visual part a span and class and then put the data from the array into a form - here a string - to print out into the DOM viewport element.
 		for(var i = 0; i < horizLines.length; i++) {
 			var line=horizLines[i].split("");
@@ -36,7 +35,6 @@
 			pictureThis+=line.join('') + "<br>";
 		}
 		viewport.innerHTML=pictureThis;
-
 	</script>
 </body>
 </html>
